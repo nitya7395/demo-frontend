@@ -1,0 +1,48 @@
+
+<div class="container">
+ 
+
+
+  <div class="table-responsive">
+    <table class="table table-striped" >
+      <thead>
+        <tr> 
+          <th scope="col"><span>First Name</span></th>
+          <th scope="col"><span>Last Name</span></th>
+          <th scope="col"><span>Email</span></th>
+          <th scope="col"><span>Group</span></th>
+          <th scope="col" *ngIf="sessionUser  != null && sessionUser.groups[0] === 'STATUS_CHANGE'"><span>Status</span></th>
+          <th scope="col" *ngIf="sessionUser  != null  && sessionUser.groups[0] != 'STATUS_CHANGE'">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of userList;">
+          <td>{{ user.firstName }}</td>
+          <td>{{ user.lastName }}</td>
+          <td>{{ user.email }}</td>
+          <td ><span *ngFor="let group of user.groups">{{ group.name }}</span></td>
+          <td *ngIf="sessionUser  != null && sessionUser.groups[0] === 'STATUS_CHANGE'"><span ><input class="form-check-input" type="checkbox" (change)="statusUpdate(user.id,!user.isActive)" value={{user.isActive}} [checked]=user.isActive id="flexCheckDefault"></span></td>
+          <td *ngIf="sessionUser  != null">
+            <div >
+              <button
+                type="button"
+                class="btn btn-primary btn-sm"
+                (click)="addGroup(user.id)" *ngIf=" sessionUser.groups[0] === 'ADD_GROUP'"
+              >
+                <span class="d-none d-md-inline">Add Group</span>
+              </button> 
+              <button
+                type="button"
+                class="btn btn-danger btn-sm"
+                (click)="deleteUser(user.id)" *ngIf=" sessionUser.groups[0] === 'DELETE_USER'"
+              >
+                <span class="d-none d-md-inline">Delete User</span>
+              </button> 
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+</div>

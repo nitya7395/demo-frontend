@@ -1,0 +1,17 @@
+<div class="container">
+
+<h2>Please select Group</h2>
+
+  <select [(ngModel)]="selectedValue">
+    <option *ngFor="let option of allPermission" [value]="option">
+       {{option}}
+    </option>
+  </select>
+  <button
+  type="button"
+  class="btn btn-primary btn-sm ml-5"
+  (click)="createGroup()"
+>
+  <span class="d-none d-md-inline">Add Group</span>
+</button> 
+</div>
